@@ -1,0 +1,67 @@
+class Main {
+
+    class Edge {
+        int src, dest;
+    }
+
+    int vertices, edges;
+
+    Edge[] edge;
+
+    Main(int vertices, int edges) {
+        this.vertices = vertices;
+        this.edges = edges;
+
+        edge = new Edge[edges];
+        for (int i = 0; i < edges; i++) {
+            edge[i] = new Edge();
+        }
+    }
+
+    public static void main(String[] args) {
+        int noVertices = 5;
+        int noEdges = 6;
+        Main g = new Main(noVertices, noEdges);
+        
+        g.edge[0].src = 1;   // Home --- Church
+        g.edge[0].dest = 3;
+
+        g.edge[1].src = 3;   // Church --- Market
+        g.edge[1].dest = 5;
+        
+        System.out.println("Answer in no. 1");
+        
+        for (int i = 0; i < 2; i++) {
+            System.out.print(g.edge[i].src);
+            if (i != 2) {
+                System.out.print(" - ");
+            }
+        }
+        System.out.println(g.edge[1].dest);
+
+        g.edge[0].src = 1;   // Home --- Park
+        g.edge[0].dest = 4;
+
+        g.edge[1].src = 4;   // Park --- School
+        g.edge[1].dest = 2;
+
+        g.edge[2].src = 2;   // School --- Market
+        g.edge[2].dest = 5;
+
+        g.edge[3].src = 5;   // Market --- Church
+        g.edge[3].dest = 3;
+
+        g.edge[4].src = 3;   // Church --- Home
+        g.edge[4].dest = 1;
+        
+        System.out.println("Answer in no. 2");
+
+        for (int i = 0; i < 5; i++) {
+            System.out.print(g.edge[i].src);
+            if (i != 5) {
+                System.out.print(" - ");
+            }
+        }
+        System.out.println(g.edge[4].dest);
+    }
+}
