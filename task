@@ -1,0 +1,75 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    
+  <h1>Task List</h1>
+  <form id="task-form">
+    <label for="task-1">Task 1:</label>
+    <input type="checkbox" id="task-1" name="task-1" value="10" />
+    <ul id="subtasks-1">
+      <li>
+        <label for="subtask-1-1">Subtask 1.1:</label>
+        <input type="checkbox" id="subtask-1-1" name="subtask-1-1" value="5" />
+      </li>
+      <li>
+        <label for="subtask-1-2">Subtask 1.2:</label>
+        <input type="checkbox" id="subtask-1-2" name="subtask-1-2" value="5" />
+      </li>
+    </ul>
+    <br />
+    <label for="task-2">Task 2:</label>
+    <input type="checkbox" id="task-2" name="task-2" value="20" />
+    <ul id="subtasks-2">
+      <li>
+        <label for="subtask-2-1">Subtask 2.1:</label>
+        <input type="checkbox" id="subtask-2-1" name="subtask-2-1" value="10" />
+      </li>
+      <li>
+        <label for="subtask-2-2">Subtask 2.2:</label>
+        <input type="checkbox" id="subtask-2-2" name="subtask-2-2" value="10" />
+      </li>
+    </ul>
+    <br />
+    <label for="task-3">Task 3:</label>
+    <input type="checkbox" id="task-3" name="task-3" value="30" />
+    <div id="result"></div>
+  </form>
+
+  <script>
+const form = document.getElementById("task-form");
+const result = document.getElementById("result");
+
+let points = 0;
+
+form.addEventListener("change", (e) => {
+  if (e.target.type === "checkbox") {
+    const parent = e.target.closest("li") || e.target.closest("ul");
+    if (e.target.checked) {
+      points += parseInt(e.target.value);
+      if (parent.id.startsWith("subtasks-")) {
+        const parentTask = document.getElementById(parent.id.replace("subtasks-", "task-"));
+        parentTask.querySelector("input[type='checkbox']").checked = true;
+        points += parseInt(parentTask.querySelector("input[type='checkbox']").value);
+      }
+    } else {
+      points -= parseInt(e.target.value);
+      if (parent.id.startsWith("subtasks-")) {
+        const parentTask = document.getElementById(parent.id.replace("subtasks-", "task-"));
+        if (parentTask.querySelectorAll("input[type='checkbox']:checked").length === 0) {
+          parentTask.querySelector("input[type='checkbox']").checked = false;
+          points -= parseInt(parentTask.querySelector("input[type='checkbox']").value);
+        }
+      }
+    }
+    result.innerHTML = `Points: ${points}`;
+  }
+});
+  </script>
+
+</body>
+</html>
