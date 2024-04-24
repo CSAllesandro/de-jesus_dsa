@@ -1,0 +1,31 @@
+DROP DATABASE ERD APPAREL;
+CREATE DATABASE ERD APPAREL;
+
+USE ERD APPAREL;
+
+CREATE TABLE Customer(
+	cust_id INT PRIMARY KEY AUTO_INCREMENT,
+	cust_name VARCHAR(255),
+	cust_address VARCHAR(255),
+	cust_email VARCHAR(255),
+	cust_phone VARCHAR(255)
+);
+ 
+CREATE TABLE Product(
+	prod_id INT PRIMARY KEY,
+	prod_name VARCHAR(255)
+);
+
+CREATE TABLE Product_detail(
+	prod_id INT PRIMARY KEY,
+	prod_desc VARCHAR(255),
+	FOREIGN KEY(prod_id) REFERENCES Product(prod_id),
+	prod_price
+);
+
+INSERT INTO Product (prod_name, prod_price)
+VALUES (1, 2, "water");
+
+
+INSERT INTO Product (prod_name, prod_price)
+VALUES (1, 2, "food");
